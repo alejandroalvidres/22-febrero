@@ -1,0 +1,92 @@
+var pelotas =[];
+function setup() {
+  createCanvas(400, 400);
+	for (var i=0; i <100;i++){
+    pelotas[i] = new Pelota();
+  }
+}
+
+function draw() {
+  background(220);
+  for (var i = 0; i < 50; i++){
+    pelotas[i].mostrar();
+    pelotas[i].mover();
+    
+    if (pelotas[i].salirx()){
+      pelotas[i].rebotarx();
+    }
+  
+    if (pelotas[i].saliry()){
+      pelotas[i].rebotary();
+}
+  }
+}
+
+
+
+
+class Pelota{
+  constructor(){
+    this.x1= (45);
+    this.y1= (45);
+    this.velx = random (1,5);
+    this.vely	=	random (0,20);
+    this.posicionx = random (0,400);
+    this.posiciony = random (0,400);
+    this.R = random (0,255);
+    this.G = random (0,255);
+    this.B = random (0,255);
+  }
+  mostrar(){
+    ellipse(this.posicionx,this.posiciony,this.x1,this.y1);
+    fill(this.R,this.G,this.B);
+  }
+  mover(){
+    this.posicionx=this.posicionx+this.velx;
+    this.posiciony=this.posiciony+this.vely;
+    
+  }
+  salirx(){
+    var res;
+    if(this.posicionx <0||this.posicionx>width ){
+      res=true
+       } else {
+      res=false
+    }
+    return res;
+  }
+  saliry(){
+    var res;
+    if(this.posiciony < 0|| this.posiciony>height ){
+       res=true
+       } else {
+      res=false
+    }
+    return res;
+  }
+  rebotarx(){
+    this.velx=this.velx * -1
+  }
+
+	rebotary(){
+    this.vely=this.vely * -1 
+  }
+}
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <script src="sketch.js"></script>
+		<script src="Pelota.js"></script>
+  </body>
+</html>
